@@ -3,26 +3,16 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"apiforge/internal/routes"
 )
 
-func homeHandler(
-	w http.ResponseWriter,
-	r *http.Request,
-) {
-	fmt.Fprintln(
-		w,
-		"Welcome to APIForge",
-	)
-}
-
 func main() {
-	http.HandleFunc(
-		"/",
-		homeHandler,
-	)
+
+	routes.RegisterRoutes()
 
 	fmt.Println(
-		"Server running on :8080",
+		"APIForge running on :8080",
 	)
 
 	http.ListenAndServe(
