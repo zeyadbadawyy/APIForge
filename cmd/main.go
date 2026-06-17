@@ -8,8 +8,7 @@ import (
 )
 
 func main() {
-
-	routes.RegisterRoutes()
+	router := routes.RegisterRoutes()
 
 	fmt.Println(
 		"APIForge running on :8080",
@@ -17,6 +16,6 @@ func main() {
 
 	http.ListenAndServe(
 		":8080",
-		nil,
+		router,
 	)
 }
