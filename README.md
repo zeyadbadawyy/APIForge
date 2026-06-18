@@ -114,7 +114,7 @@ GET /api/v1/tasks?sort=priority
 
 ### Create Task
 
-![Create Task](assets/screenshots/create-task.png)
+![Create Task](assets/screenshots/create_task.png)
 
 ### Statistics
 
