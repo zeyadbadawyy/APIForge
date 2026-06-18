@@ -17,6 +17,11 @@ func RegisterRoutes() http.Handler {
 		middleware.Logger,
 	)
 
+	r.Get(
+		"/",
+		handlers.APIInfo,
+	)
+
 	r.Route(
 		"/api/v1",
 		func(r chi.Router) {

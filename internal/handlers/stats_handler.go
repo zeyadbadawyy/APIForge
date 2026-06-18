@@ -17,19 +17,20 @@ func GetStats(
 
 	completed := 0
 	pending := 0
+	inProgress := 0
 
 	for _, task := range storage.Tasks {
 
-		if task.Status ==
-			"Completed" {
+		switch task.Status {
 
+		case "Completed":
 			completed++
-		}
 
-		if task.Status ==
-			"Pending" {
-
+		case "Pending":
 			pending++
+
+		case "In Progress":
+			inProgress++
 		}
 	}
 
@@ -40,6 +41,7 @@ func GetStats(
 			"totalTasks": total,
 			"completed":  completed,
 			"pending":    pending,
+			"inProgress": inProgress,
 		},
 	)
 }

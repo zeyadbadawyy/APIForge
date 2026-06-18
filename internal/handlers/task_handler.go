@@ -33,11 +33,23 @@ func GetTasks(
 		r.URL.Query().Get(
 			"sort",
 		)
+
+	tasks :=
+		make(
+			[]models.Task,
+			len(storage.Tasks),
+		)
+
+	copy(
+		tasks,
+		storage.Tasks,
+	)
+
 	if statusFilter != "" {
 
 		var filtered []models.Task
 
-		for _, task := range storage.Tasks {
+		for _, task := range tasks {
 
 			if task.Status ==
 				statusFilter {
@@ -50,90 +62,70 @@ func GetTasks(
 			}
 		}
 
-		if search != "" {
+		tasks = filtered
+	}
 
-			var filtered []models.Task
+	if search != "" {
 
-			for _, task := range storage.Tasks {
+		var filtered []models.Task
 
-				if strings.Contains(
-					strings.ToLower(
-						task.Title,
-					),
-					strings.ToLower(
-						search,
-					),
-				) {
+		for _, task := range tasks {
 
-					filtered =
-						append(
-							filtered,
-							task,
-						)
-				}
+			if strings.Contains(
+				strings.ToLower(
+					task.Title,
+				),
+				strings.ToLower(
+					search,
+				),
+			) {
+
+				filtered =
+					append(
+						filtered,
+						task,
+					)
+			}
+		}
+
+		tasks = filtered
+	}
+
+	if sortBy == "title" {
+
+		sort.Slice(
+			tasks,
+			func(i, j int) bool {
+
+				return tasks[i].Title <
+					tasks[j].Title
+			},
+		)
+	}
+
+	if sortBy == "priority" {
+
+		order :=
+			map[string]int{
+				"High":   3,
+				"Medium": 2,
+				"Low":    1,
 			}
 
-			sendJSON(
-				w,
-				http.StatusOK,
-				filtered,
-			)
-
-			return
-		}
-
-		tasks :=
-			make(
-				[]models.Task,
-				len(storage.Tasks),
-			)
-		if sortBy == "title" {
-
-			sort.Slice(
-				tasks,
-				func(i, j int) bool {
-
-					return tasks[i].Title <
-						tasks[j].Title
-				},
-			)
-		}
-		if sortBy == "priority" {
-
-			order :=
-				map[string]int{
-					"High":   3,
-					"Medium": 2,
-					"Low":    1,
-				}
-
-			sort.Slice(
-				tasks,
-				func(i, j int) bool {
-
-					return order[tasks[i].Priority] >
-						order[tasks[j].Priority]
-				},
-			)
-		}
-
-		copy(
+		sort.Slice(
 			tasks,
-			storage.Tasks,
-		)
-		sendJSON(
-			w,
-			http.StatusOK,
-			tasks,
-		)
+			func(i, j int) bool {
 
-		return
+				return order[tasks[i].Priority] >
+					order[tasks[j].Priority]
+			},
+		)
 	}
 
 	sendJSON(
 		w,
 		http.StatusOK,
-		storage.Tasks,
+		tasks,
 	)
 }
 
