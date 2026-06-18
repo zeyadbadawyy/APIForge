@@ -12,20 +12,21 @@ import (
 )
 
 func main() {
-	storage.LoadTasks()
-	router := routes.RegisterRoutes()
-
-	fmt.Println(
-		"APIForge running on :8080",
-	)
 	godotenv.Load()
-
 	port :=
 		os.Getenv("PORT")
 
 	if port == "" {
 		port = "8080"
 	}
+
+	storage.LoadTasks()
+
+	router := routes.RegisterRoutes()
+
+	fmt.Println(
+		"APIForge running on :8080",
+	)
 
 	http.ListenAndServe(
 		":"+port,
