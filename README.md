@@ -35,36 +35,6 @@ It provides CRUD operations, filtering, searching, sorting, validation, statisti
 
 ---
 
-## 📂 Project Structure
-
-```txt
-APIForge
-│
-├── cmd
-│   └── main.go
-│
-├── internal
-│   ├── handlers
-│   ├── middleware
-│   ├── models
-│   ├── routes
-│   ├── storage
-│   └── utils
-│
-├── assets
-│   ├── screenshots
-│   └── postman
-│
-├── data
-│   └── tasks.json
-│
-├── Dockerfile
-├── go.mod
-└── README.md
-```
-
----
-
 ## 📡 API Endpoints
 
 | Method | Endpoint | Description |
