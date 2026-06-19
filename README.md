@@ -179,4 +179,6 @@ to test all endpoints quickly.
 
 ## 👨‍💻 Author
 
-Built by Zeyad Badawy.
+**Zeyad Badawy**
+
+Full-Stack Developer | Software Engineer
