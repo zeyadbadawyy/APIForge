@@ -1,3 +1,13 @@
+<p align="center">
+  <img src="assets/logo/apiforge-logo.png" width="180">
+</p>
+
+<h1 align="center">APIForge</h1>
+
+<p align="center">
+  Task Management REST API
+</p>
+
 # 🚀 APIForge
 
 APIForge is a Task Management REST API built with Go and Chi Router.
